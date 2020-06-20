@@ -6,7 +6,7 @@ function App() {
     <div className="min-h-screen flex justify-center items-center">
       <h1 className="flex items-center font-bold text-5xl tracking-tight text-gray-900">
         Zelda BOTW Starter
-        <Triforce className="ml-4 w-20 h-20 text-zelda-triforce fill-current" />
+        <Triforce className="ml-4 w-20 h-20 text-zelda-yellow fill-current" />
       </h1>
     </div>
   );
