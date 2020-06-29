@@ -7,7 +7,7 @@ type Props = {
 };
 
 const ItemsGrid: React.FC<Props> = ({ items }) => (
-  <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
+  <div className="mx-auto grid grid-cols-3 md:grid-cols-5 gap-6">
     {items.map((item, index) => (
       <Item
         key={`${item.name}-${index}`}

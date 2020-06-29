@@ -50,9 +50,11 @@ function App() {
       tabIndex={0}
     >
       <div className="container mx-auto flex flex-col xl:flex-row">
-        <div className="w-full xl:w-1/2">
+        <div className="flex flex-col justify-center w-full max-w-2xl mx-auto xl:w-1/2 relative xl:px-12">
           <ItemsContext.Provider value={contextState}>
-            <ItemsGrid items={getItems()} />
+            <div className="flex">
+              <ItemsGrid items={getItems()} />
+            </div>
           </ItemsContext.Provider>
         </div>
         <div className="w-full xl:w-1/2"></div>
