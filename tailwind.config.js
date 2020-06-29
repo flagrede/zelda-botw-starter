@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       colors: {
         zelda: {
+          bgBlackTransparent: "rgba(0, 0, 0, 0.5)",
           blue: "#0290fe",
           darkGreen: "#0c1f0c",
           darkGray: "#2f3124",
