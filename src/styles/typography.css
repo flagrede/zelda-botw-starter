@@ -1,0 +1,45 @@
+/* purgecss start ignore */
+
+@font-face {
+  font-family: "Calamity";
+  src: url("/fonts/calamity/Calamity-Regular.woff") format("woff"),
+    url("/fonts/calamity/Calamity-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Calamity";
+  src: url("/fonts/calamity/Calamity-Regular.woff2") format("woff2"),
+    url("/fonts/calamity/Calamity-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Calamity";
+  src: url("/fonts/calamity/Calamity-Bold.woff") format("woff"),
+    url("/fonts/calamity/Calamity-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Calamity";
+  src: url("/fonts/calamity/Calamity-Bold.woff2") format("woff2"),
+    url("/fonts/calamity/Calamity-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+.font-calamity {
+  font-family: "Calamity";
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* purgecss end ignore */
