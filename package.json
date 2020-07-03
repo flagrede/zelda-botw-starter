@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.10"
+    "@types/classnames": "^2.2.10",
+    "windups": "^1.0.2"
   }
 }

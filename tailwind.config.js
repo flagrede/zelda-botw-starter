@@ -26,6 +26,7 @@ module.exports = {
       boxShadow: {
         yellow: "rgba(255, 255, 190, 0.4) 0px 0px 6px 2px",
       },
+      minHeight: (theme) => ({ ...theme("spacing") }),
     },
   },
   variants: {

@@ -2600,6 +2600,11 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+break-styled-lines@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/break-styled-lines/-/break-styled-lines-1.1.2.tgz#2c946e7257894d4950e24231540afe0d1943000a"
+  integrity sha512-yxc6mVfy6icUbFhOT82/Lf2D+/DbjOqL6INP5P1KGJJdZaef4dWlb8p7Eopkz1OCismQ2AwgND/QdeY2xp0Nbw==
+
 brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -11139,6 +11144,13 @@ which@^2.0.1:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
+
+windups@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/windups/-/windups-1.0.2.tgz#1f34e8ccbffa24ca35e1f75926d971ad6a67d552"
+  integrity sha512-tyIt2zuN5KM9tz2pd9sf6MkkEDix+8eHdTS3YTvfrqmS5YmqfRl69jghsAtG7keywGYy2PqYmd2btSQ3n0pyTw==
+  dependencies:
+    break-styled-lines "1.1.2"
 
 word-wrap@~1.2.3:
   version "1.2.3"
