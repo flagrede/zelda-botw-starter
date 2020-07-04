@@ -11,10 +11,12 @@ import {
   goLeft,
   goRight,
   goUp,
+  COLUMNS_NUMBER,
 } from "./utils/keyboardNavigation";
 import CategoriesMenu from "./components/CategoriesMenu";
 import NavigationArrow from "./components/NavigationArrow";
 import { NavigationArrowVariant } from "./components/NavigationArrow";
+import navigateToDirection from "./utils/navigateToDirection";
 
 function App() {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
@@ -30,15 +32,30 @@ function App() {
   const handleKeyPressed = (event: React.KeyboardEvent) => {
     let newItemSelected = null;
     const positionItemSelected = getMatrixPositionFromIndex(itemSelected);
-    if (event.key === "ArrowUp") {
-      newItemSelected = goUp(positionItemSelected);
-    } else if (event.key === "ArrowDown") {
-      newItemSelected = newItemSelected = goDown(positionItemSelected);
-    } else if (event.key === "ArrowLeft") {
-      newItemSelected = goLeft(positionItemSelected);
-    } else if (event.key === "ArrowRight") {
-      newItemSelected = goRight(positionItemSelected);
+
+    switch (event.key) {
+      case "ArrowUp":
+        newItemSelected = goUp(positionItemSelected);
+        break;
+      case "ArrowDown":
+        newItemSelected = newItemSelected = goDown(positionItemSelected);
+        break;
+      case "ArrowLeft":
+        if (positionItemSelected.y === 0) {
+          navigateToDirection(-1, page, setPage);
+        }
+        newItemSelected = goLeft(positionItemSelected);
+        break;
+      case "ArrowRight":
+        if (positionItemSelected.y === COLUMNS_NUMBER - 1) {
+          navigateToDirection(1, page, setPage);
+        }
+        newItemSelected = goRight(positionItemSelected);
+        break;
+      default:
+        break;
     }
+
     if (newItemSelected) {
       setItemSelected(getIndexFromMaxtrixPosition(newItemSelected));
     }

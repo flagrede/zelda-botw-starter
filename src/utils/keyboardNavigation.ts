@@ -1,5 +1,5 @@
-const COLUMNS_NUMBER = 5;
-const ROWS_NUMBER = 4;
+export const COLUMNS_NUMBER = 5;
+export const ROWS_NUMBER = 4;
 
 type PositionType = {
   x: number;
@@ -24,14 +24,17 @@ const goDown = (position: PositionType) => ({
   x: Math.min(position.x + 1, ROWS_NUMBER - 1),
   y: position.y,
 });
-const goLeft = (position: PositionType) => ({
-  x: position.x,
-  y: Math.max(position.y - 1, 0),
-});
-const goRight = (position: PositionType) => ({
-  x: position.x,
-  y: Math.min(position.y + 1, COLUMNS_NUMBER - 1),
-});
+const goLeft = (position: PositionType) => {
+  const newPosition = position.y - 1;
+  return {
+    x: position.x,
+    y: newPosition < 0 ? COLUMNS_NUMBER - 1 : newPosition,
+  };
+};
+const goRight = (position: PositionType) => {
+  const newPosition = position.y + 1;
+  return { x: position.x, y: newPosition % COLUMNS_NUMBER };
+};
 
 export {
   getMatrixPositionFromIndex,

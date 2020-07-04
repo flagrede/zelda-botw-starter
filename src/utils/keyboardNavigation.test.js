@@ -125,6 +125,28 @@ describe("goRight", () => {
     // Then
     expect(result).toEqual({ x: 1, y: 1 });
   });
+
+  it("should move to x:1, y:1", () => {
+    // Given
+    const position = { x: 1, y: 0 };
+
+    // When
+    const result = goRight(position);
+
+    // Then
+    expect(result).toEqual({ x: 1, y: 1 });
+  });
+
+  it("should move to x:1, y:0", () => {
+    // Given
+    const position = { x: 1, y: 4 };
+
+    // When
+    const result = goRight(position);
+
+    // Then
+    expect(result).toEqual({ x: 1, y: 0 });
+  });
 });
 
 describe("goLeft", () => {
@@ -148,5 +170,16 @@ describe("goLeft", () => {
 
     // Then
     expect(result).toEqual({ x: 1, y: 1 });
+  });
+
+  it("should move to x:1, y:4", () => {
+    // Given
+    const position = { x: 1, y: 0 };
+
+    // When
+    const result = goLeft(position);
+
+    // Then
+    expect(result).toEqual({ x: 1, y: 4 });
   });
 });
