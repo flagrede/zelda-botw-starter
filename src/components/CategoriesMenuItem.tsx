@@ -15,7 +15,7 @@ const CategoriesMenuItem: React.FC<Props> = ({
 }) => (
   <div
     onClick={() => {
-      setPage([page, 1]);
+      setPage([page, 0]);
     }}
     className={cx(
       {

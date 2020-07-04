@@ -82,7 +82,7 @@ function App() {
           />
           <ItemsContext.Provider value={contextState}>
             <div className="flex">
-              <ItemsGrid items={items} />
+              <ItemsGrid direction={direction} page={page} items={items} />
             </div>
           </ItemsContext.Provider>
           <NavigationArrow
