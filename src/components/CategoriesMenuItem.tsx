@@ -1,10 +1,9 @@
 import cx from "classnames";
 import React from "react";
-import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  setPage: React.Dispatch<React.SetStateAction<[number, number]>>;
   isSelected: boolean;
 };
 
@@ -16,7 +15,7 @@ const CategoriesMenuItem: React.FC<Props> = ({
 }) => (
   <div
     onClick={() => {
-      setPage(page);
+      setPage([page, 1]);
     }}
     className={cx(
       {

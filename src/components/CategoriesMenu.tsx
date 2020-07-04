@@ -1,14 +1,13 @@
 import React from "react";
-import CategoriesMenuItem from "./CategoriesMenuItem";
 import { ItemsMainCategoriesType } from "../data/items.type";
+import CategoriesMenuItem from "./CategoriesMenuItem";
+import Armor from "./Icons/Armor";
 import Shield from "./Icons/Shield";
 import Sword from "./Icons/Sword";
-import Armor from "./Icons/Armor";
-import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   categorySelected: ItemsMainCategoriesType;
-  setPage: Dispatch<SetStateAction<number>>;
+  setPage: React.Dispatch<React.SetStateAction<[number, number]>>;
 };
 
 const CategoriesMenu: React.FC<Props> = ({ categorySelected, setPage }) => {

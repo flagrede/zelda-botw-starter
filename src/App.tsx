@@ -13,10 +13,12 @@ import {
   goUp,
 } from "./utils/keyboardNavigation";
 import CategoriesMenu from "./components/CategoriesMenu";
+import NavigationArrow from "./components/NavigationArrow";
+import { NavigationArrowVariant } from "./components/NavigationArrow";
 
 function App() {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
-  const [page, setPage] = useState(0);
+  const [[page, direction], setPage] = useState([0, 0]);
   const [itemSelected, setItemSelected] = useState(0);
   const contextState = {
     setItemSelected,
@@ -66,6 +68,16 @@ function App() {
               <ItemsGrid items={items} />
             </div>
           </ItemsContext.Provider>
+          <NavigationArrow
+            currentPage={page}
+            setPage={setPage}
+            variant={NavigationArrowVariant.LEFT}
+          />
+          <NavigationArrow
+            currentPage={page}
+            setPage={setPage}
+            variant={NavigationArrowVariant.RIGHT}
+          />
         </div>
         <div className="flex flex-col items-center self-end xl:items-start w-full xl:w-1/2 my-6 xl:my-0">
           <img
