@@ -14,13 +14,15 @@ import {
 } from "./utils/keyboardNavigation";
 
 function App() {
-  const items = getItems();
+  const [itemsPaginated, setItemsPaginated] = useState(getItems());
+  const [page, setPage] = useState(0);
   const [itemSelected, setItemSelected] = useState(0);
   const contextState = {
     setItemSelected,
     itemSelected,
   };
   const inventoryRef = useRef<HTMLDivElement>(null);
+  const items = itemsPaginated[page].items;
 
   const handleKeyPressed = (event: React.KeyboardEvent) => {
     let newItemSelected = null;

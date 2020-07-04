@@ -22,8 +22,12 @@ export type ItemType = {
   isNew?: boolean;
 };
 
-type ItemsType = {
-  [key: string]: ItemType[];
+export type ItemsPage = {
+  items: ItemType[];
+  mainCategory: ItemsMainCategoriesType;
+  page: number;
 };
 
-export default ItemsType;
+export type ItemsType = {
+  [key: string]: ItemType[];
+};
