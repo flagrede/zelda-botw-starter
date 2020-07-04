@@ -12,6 +12,7 @@ import {
   goRight,
   goUp,
 } from "./utils/keyboardNavigation";
+import CategoriesMenu from "./components/CategoriesMenu";
 
 function App() {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
@@ -51,11 +52,15 @@ function App() {
     <div
       ref={inventoryRef}
       onKeyDown={handleKeyPressed}
-      className="bg-zelda-darkGreen min-h-screen pt-32 font-calamity"
+      className="bg-zelda-darkGreen min-h-screen pt-10 font-calamity"
       tabIndex={0}
     >
       <div className="container mx-auto flex flex-col xl:flex-row">
         <div className="flex flex-col justify-center w-full max-w-2xl mx-auto xl:w-1/2 relative xl:px-12">
+          <CategoriesMenu
+            categorySelected={itemsPaginated[page].mainCategory}
+            setPage={setPage}
+          />
           <ItemsContext.Provider value={contextState}>
             <div className="flex">
               <ItemsGrid items={items} />
