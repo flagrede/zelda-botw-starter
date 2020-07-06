@@ -9,7 +9,7 @@ https://www.gameuionweb.com/zelda-botw
 ## Articles links:
 
 - [Part 1](https://dev.to/flagrede/how-to-replicate-the-zelda-botw-interface-with-react-tailwind-and-framer-motion-part-1-298g)
-- Part 2: TBD
+- [Part 2](https://dev.to/flagrede/how-to-replicate-the-zelda-botw-interface-with-react-tailwind-and-framer-motion-part-2-3nd4)
 - Part 3: TBD
 
 ## Stack
