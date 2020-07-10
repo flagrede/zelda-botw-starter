@@ -22,12 +22,25 @@ function App() {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
   const [[page, direction], setPage] = useState([0, 0]);
   const [itemSelected, setItemSelected] = useState(0);
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const inventoryRef = useRef<HTMLDivElement>(null);
+  const items = itemsPaginated[page].items;
+  const isSelectedItemNotEmpty = items[itemSelected].name !== "";
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+    if (inventoryRef.current) {
+      inventoryRef.current.focus();
+    }
+  };
+
   const contextState = {
     setItemSelected,
     itemSelected,
+    isModalOpened,
+    setIsModalOpened,
+    closeModal,
   };
-  const inventoryRef = useRef<HTMLDivElement>(null);
-  const items = itemsPaginated[page].items;
 
   const handleKeyPressed = (event: React.KeyboardEvent) => {
     let newItemSelected = null;
@@ -52,6 +65,11 @@ function App() {
         }
         newItemSelected = goRight(positionItemSelected);
         break;
+      case "Enter":
+        if (isSelectedItemNotEmpty) {
+          setIsModalOpened(!isModalOpened);
+        }
+        break;
       default:
         break;
     }
@@ -71,7 +89,7 @@ function App() {
     <div
       ref={inventoryRef}
       onKeyDown={handleKeyPressed}
-      className="bg-zelda-darkGreen min-h-screen pt-10 font-calamity"
+      className="bg-zelda-darkGreen min-h-screen pt-10 font-calamity outline-none"
       tabIndex={0}
     >
       <div className="container mx-auto flex flex-col xl:flex-row">
@@ -102,7 +120,7 @@ function App() {
             src={linkImage}
             alt="link"
           />
-          {items[itemSelected].name && (
+          {isSelectedItemNotEmpty && (
             <ItemInformation item={items[itemSelected]} />
           )}
         </div>
