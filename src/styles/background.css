@@ -1,0 +1,8 @@
+.zelda-background-item {
+  @apply bg-zelda-blue;
+  background: radial-gradient(
+    circle,
+    rgba(2, 144, 254, 1) 70%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}

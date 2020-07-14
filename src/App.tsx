@@ -3,7 +3,7 @@ import linkImage from "./assets/bg.png";
 import ItemInformation from "./components/ItemInformation";
 import ItemsGrid from "./components/ItemsGrid";
 import ItemsContext from "./context/ItemsContext";
-import getItems from "./utils/getItems";
+import getItems, { emptyItem } from "./utils/getItems";
 import {
   getIndexFromMaxtrixPosition,
   getMatrixPositionFromIndex,
@@ -23,6 +23,7 @@ function App() {
   const [[page, direction], setPage] = useState([0, 0]);
   const [itemSelected, setItemSelected] = useState(0);
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [itemsEquipped, setItemsEquipped] = useState({});
   const inventoryRef = useRef<HTMLDivElement>(null);
   const items = itemsPaginated[page].items;
   const isSelectedItemNotEmpty = items[itemSelected].name !== "";
@@ -34,12 +35,30 @@ function App() {
     }
   };
 
+  const equipItem = () => {
+    const itemSelectedData = items[itemSelected];
+    setItemsEquipped({
+      ...itemsEquipped,
+      [itemSelectedData.category]: itemSelectedData,
+    });
+  };
+
+  const dropItem = () => {
+    const newItemsPaginated = [...itemsPaginated];
+    newItemsPaginated[page].items.splice(itemSelected, 1);
+    newItemsPaginated[page].items.push(emptyItem);
+    setItemsPaginated(newItemsPaginated);
+  };
+
   const contextState = {
     setItemSelected,
     itemSelected,
     isModalOpened,
     setIsModalOpened,
     closeModal,
+    equipItem,
+    dropItem,
+    itemsEquipped,
   };
 
   const handleKeyPressed = (event: React.KeyboardEvent) => {
@@ -121,7 +140,10 @@ function App() {
             alt="link"
           />
           {isSelectedItemNotEmpty && (
-            <ItemInformation item={items[itemSelected]} />
+            <ItemInformation
+              item={items[itemSelected]}
+              itemsEquipped={itemsEquipped}
+            />
           )}
         </div>
       </div>

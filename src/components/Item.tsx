@@ -3,20 +3,23 @@ import ItemsContext from "../context/ItemsContext";
 import cx from "classnames";
 import TrianglesBox from "./TrianglesBox";
 import Modal from "./Modal";
+import { ItemCategoriesType } from "../data/items.type";
 
 type Props = {
   name: string;
   icon: string;
   value: string;
+  category: ItemCategoriesType;
   itemIndex: number;
 };
 
-const Item: React.FC<Props> = ({ name, icon, value, itemIndex }) => {
+const Item: React.FC<Props> = ({ name, icon, value, category, itemIndex }) => {
   const {
     itemSelected,
     setItemSelected,
     isModalOpened,
     setIsModalOpened,
+    itemsEquipped,
   } = useContext(ItemsContext);
 
   const handleClick = () => {
@@ -25,6 +28,7 @@ const Item: React.FC<Props> = ({ name, icon, value, itemIndex }) => {
   };
 
   const isSelected = itemSelected === itemIndex;
+  const isEquipped = itemsEquipped && itemsEquipped[category]?.name === name;
 
   return (
     <div
@@ -32,6 +36,7 @@ const Item: React.FC<Props> = ({ name, icon, value, itemIndex }) => {
       className={cx(
         {
           "shadow-yellow border-zelda-softYellow border-2": isSelected,
+          "zelda-background-item ": isEquipped,
         },
         "relative w-20 h-20 bg-black border border-zelda-darkGray cursor-pointer"
       )}

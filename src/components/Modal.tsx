@@ -11,7 +11,7 @@ enum ModalOptions {
 }
 
 export default () => {
-  const { closeModal } = useContext(ItemsContext);
+  const { closeModal, equipItem, dropItem } = useContext(ItemsContext);
   const [selectedOption, setSelectedOption] = useState(ModalOptions.EQUIP);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -24,6 +24,23 @@ export default () => {
     } else if (event.key === "ArrowDown") {
       setSelectedOption(Math.min(selectedOption + 1, 2));
     } else if (event.key === "Enter") {
+      switch (selectedOption) {
+        case ModalOptions.EQUIP:
+          if (closeModal && equipItem) {
+            equipItem();
+            closeModal();
+          }
+          break;
+        case ModalOptions.DROP:
+          if (closeModal && dropItem) {
+            dropItem();
+            closeModal();
+          }
+          break;
+        default:
+          closeModal && closeModal();
+          break;
+      }
       closeModal && closeModal();
     }
   };

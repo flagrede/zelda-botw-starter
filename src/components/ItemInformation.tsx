@@ -1,14 +1,15 @@
-import React from "react";
 import cx from "classnames";
-import CategoryIcon from "./CategoryIcon";
-import { ItemType } from "../data/items.type";
+import React from "react";
 import TypeWriter from "../components/TypeWriter";
+import { ItemType } from "../data/items.type";
+import CategoryIcon from "./CategoryIcon";
 
 type Props = {
   item: ItemType;
+  itemsEquipped: { [key: string]: ItemType };
 };
 
-const ItemInformation: React.FC<Props> = ({ item }) => (
+const ItemInformation: React.FC<Props> = ({ item, itemsEquipped }) => (
   <div
     className={cx(
       "relative w-full max-w-xs md:max-w-lg z-10",
@@ -16,6 +17,9 @@ const ItemInformation: React.FC<Props> = ({ item }) => (
       "bg-zelda-bgBlackTransparent border border-zelda-darkGray"
     )}
   >
+    {itemsEquipped[item.category] === item && (
+      <div className="absolute left-0 top-0 bottom-0 m-2 w-1 bg-zelda-blue" />
+    )}
     <div className="text-lg font-bold mb-2 pb-2 border-zelda-darkGray border-b">
       {item.name}
     </div>

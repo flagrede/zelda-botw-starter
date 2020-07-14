@@ -2,7 +2,7 @@ import items from "../data/items";
 import { ItemCategoriesType, ItemsPage } from "../data/items.type";
 import { ItemsMainCategoriesType } from "./../data/items.type";
 
-const emptyItem = {
+export const emptyItem = {
   name: "",
   icon: "",
   value: "",
