@@ -21,6 +21,7 @@ import NavigationArrow from "./components/NavigationArrow";
 import { NavigationArrowVariant } from "./components/NavigationArrow";
 import navigateToDirection from "./utils/navigateToDirection";
 import { ItemsBonusType, ItemType } from "./data/items.type";
+import EnduranceGauge from "./components/EnduranceGauge";
 // @ts-ignore
 import selectSound from "./assets/sounds/select.mp3";
 // @ts-ignore
@@ -184,6 +185,7 @@ const Zelda = () => {
             alt="link"
           />
           <div className="flex flex-row items-center justify-center xl:flex-col xl:absolute mb-4 xl:mb-0 xl:mt-16 xl:top-0">
+            <EnduranceGauge />
             <BonusList
               fire={activeBonus.fire}
               swimming={activeBonus.swimming}
