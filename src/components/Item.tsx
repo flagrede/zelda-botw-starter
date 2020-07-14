@@ -6,6 +6,7 @@ import BonusIcon from "./BonusIcon";
 import Modal from "./Modal";
 import TrianglesBox from "./TrianglesBox";
 import SoundContext from "../context/SoundContext";
+import SparkleAnimation from "./SparkleAnimation";
 
 type Props = {
   name: string;
@@ -14,6 +15,7 @@ type Props = {
   category: ItemCategoriesType;
   bonus?: ItemsBonusType;
   itemIndex: number;
+  isNew?: boolean;
 };
 
 const Item: React.FC<Props> = ({
@@ -23,6 +25,7 @@ const Item: React.FC<Props> = ({
   category,
   bonus,
   itemIndex,
+  isNew,
 }) => {
   const {
     itemSelected,
@@ -56,6 +59,7 @@ const Item: React.FC<Props> = ({
         "relative w-20 h-20 bg-black border border-zelda-darkGray cursor-pointer"
       )}
     >
+      {isNew && <SparkleAnimation />}
       {isSelected && !isModalOpened && <TrianglesBox />}
       {bonus && (
         <BonusIcon bonusType={bonus} className="absolute top-0 left-0" />
