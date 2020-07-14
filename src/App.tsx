@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import linkImage from "./assets/bg.png";
 import ItemInformation from "./components/ItemInformation";
 import ItemsGrid from "./components/ItemsGrid";
+import BonusList from "./components/BonusList";
 import ItemsContext from "./context/ItemsContext";
 import getItems, { emptyItem } from "./utils/getItems";
 import {
@@ -17,16 +18,24 @@ import CategoriesMenu from "./components/CategoriesMenu";
 import NavigationArrow from "./components/NavigationArrow";
 import { NavigationArrowVariant } from "./components/NavigationArrow";
 import navigateToDirection from "./utils/navigateToDirection";
+import { ItemsBonusType, ItemType } from "./data/items.type";
 
 function App() {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
   const [[page, direction], setPage] = useState([0, 0]);
   const [itemSelected, setItemSelected] = useState(0);
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [itemsEquipped, setItemsEquipped] = useState({});
+  const [itemsEquipped, setItemsEquipped] = useState<{
+    [key: string]: ItemType;
+  }>({});
   const inventoryRef = useRef<HTMLDivElement>(null);
   const items = itemsPaginated[page].items;
   const isSelectedItemNotEmpty = items[itemSelected].name !== "";
+  const [activeBonus, setActiveBonus] = useState({
+    [ItemsBonusType.FIRE]: 0,
+    [ItemsBonusType.SWIMMING]: 0,
+    [ItemsBonusType.CLIMBING]: 0,
+  });
 
   const closeModal = () => {
     setIsModalOpened(false);
@@ -99,6 +108,27 @@ function App() {
   };
 
   useEffect(() => {
+    const bonusEquipped = Object.values(itemsEquipped).map(
+      (item) => item.bonus
+    );
+
+    const defaultAccumulator = {
+      [ItemsBonusType.FIRE]: 0,
+      [ItemsBonusType.SWIMMING]: 0,
+      [ItemsBonusType.CLIMBING]: 0,
+    };
+
+    const newActiveBonus = bonusEquipped.reduce((accumulator, currentValue) => {
+      if (currentValue) {
+        accumulator[currentValue] += 1;
+      }
+      return accumulator;
+    }, defaultAccumulator);
+
+    setActiveBonus(newActiveBonus);
+  }, [itemsEquipped]);
+
+  useEffect(() => {
     if (inventoryRef.current) {
       inventoryRef.current.focus();
     }
@@ -139,6 +169,13 @@ function App() {
             src={linkImage}
             alt="link"
           />
+          <div className="flex flex-row items-center justify-center xl:flex-col xl:absolute mb-4 xl:mb-0 xl:mt-16 xl:top-0">
+            <BonusList
+              fire={activeBonus.fire}
+              swimming={activeBonus.swimming}
+              climbing={activeBonus.climbing}
+            />
+          </div>
           {isSelectedItemNotEmpty && (
             <ItemInformation
               item={items[itemSelected]}

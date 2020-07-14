@@ -1,3 +1,9 @@
+export enum ItemsBonusType {
+  FIRE = "fire",
+  SWIMMING = "swimming",
+  CLIMBING = "climbing",
+}
+
 export enum ItemsMainCategoriesType {
   WEAPONS = "weapons",
   SHIELDS = "shields",
@@ -18,7 +24,7 @@ export type ItemType = {
   icon: string;
   value: string;
   description: string;
-  bonus?: string;
+  bonus?: ItemsBonusType;
   isNew?: boolean;
 };
 

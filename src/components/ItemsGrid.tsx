@@ -42,6 +42,7 @@ const ItemsGrid: React.FC<Props> = ({ items, page, direction }) => (
         icon={item.icon}
         value={item.value}
         category={item.category}
+        bonus={item.bonus}
         itemIndex={index}
       />
     ))}

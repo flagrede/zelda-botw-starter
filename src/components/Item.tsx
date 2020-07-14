@@ -1,19 +1,28 @@
+import cx from "classnames";
 import React, { useContext } from "react";
 import ItemsContext from "../context/ItemsContext";
-import cx from "classnames";
-import TrianglesBox from "./TrianglesBox";
+import { ItemCategoriesType, ItemsBonusType } from "../data/items.type";
+import BonusIcon from "./BonusIcon";
 import Modal from "./Modal";
-import { ItemCategoriesType } from "../data/items.type";
+import TrianglesBox from "./TrianglesBox";
 
 type Props = {
   name: string;
   icon: string;
   value: string;
   category: ItemCategoriesType;
+  bonus?: ItemsBonusType;
   itemIndex: number;
 };
 
-const Item: React.FC<Props> = ({ name, icon, value, category, itemIndex }) => {
+const Item: React.FC<Props> = ({
+  name,
+  icon,
+  value,
+  category,
+  bonus,
+  itemIndex,
+}) => {
   const {
     itemSelected,
     setItemSelected,
@@ -42,6 +51,9 @@ const Item: React.FC<Props> = ({ name, icon, value, category, itemIndex }) => {
       )}
     >
       {isSelected && !isModalOpened && <TrianglesBox />}
+      {bonus && (
+        <BonusIcon bonusType={bonus} className="absolute top-0 left-0" />
+      )}
       <img alt={name} src={icon} />
       {value && (
         <div className="z-0 bg-black -mx-1 -my-1 text-sm text-white absolute bottom-0 right-0 border border-zelda-darkGray px-2">
