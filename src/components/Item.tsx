@@ -5,6 +5,7 @@ import { ItemCategoriesType, ItemsBonusType } from "../data/items.type";
 import BonusIcon from "./BonusIcon";
 import Modal from "./Modal";
 import TrianglesBox from "./TrianglesBox";
+import SoundContext from "../context/SoundContext";
 
 type Props = {
   name: string;
@@ -31,7 +32,12 @@ const Item: React.FC<Props> = ({
     itemsEquipped,
   } = useContext(ItemsContext);
 
+  const { playAction } = useContext(SoundContext);
+
   const handleClick = () => {
+    if (!isModalOpened) {
+      playAction();
+    }
     setItemSelected && setItemSelected(itemIndex);
     setIsModalOpened && setIsModalOpened(!isModalOpened);
   };

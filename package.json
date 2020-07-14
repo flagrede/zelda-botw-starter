@@ -21,7 +21,8 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "tailwindcss": "^1.4.6",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "use-sound": "^1.0.2"
   },
   "scripts": {
     "start": "run-p watch:css react-scripts:start",

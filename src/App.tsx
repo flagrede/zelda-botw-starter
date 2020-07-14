@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import useSound from "use-sound";
 import linkImage from "./assets/bg.png";
 import ItemInformation from "./components/ItemInformation";
 import ItemsGrid from "./components/ItemsGrid";
 import BonusList from "./components/BonusList";
 import ItemsContext from "./context/ItemsContext";
+import SoundContext from "./context/SoundContext";
 import getItems, { emptyItem } from "./utils/getItems";
 import {
   getIndexFromMaxtrixPosition,
@@ -19,8 +21,12 @@ import NavigationArrow from "./components/NavigationArrow";
 import { NavigationArrowVariant } from "./components/NavigationArrow";
 import navigateToDirection from "./utils/navigateToDirection";
 import { ItemsBonusType, ItemType } from "./data/items.type";
+// @ts-ignore
+import selectSound from "./assets/sounds/select.mp3";
+// @ts-ignore
+import actionSound from "./assets/sounds/action.mp3";
 
-function App() {
+const Zelda = () => {
   const [itemsPaginated, setItemsPaginated] = useState(getItems());
   const [[page, direction], setPage] = useState([0, 0]);
   const [itemSelected, setItemSelected] = useState(0);
@@ -36,6 +42,7 @@ function App() {
     [ItemsBonusType.SWIMMING]: 0,
     [ItemsBonusType.CLIMBING]: 0,
   });
+  const { playSelect, playAction } = useContext(SoundContext);
 
   const closeModal = () => {
     setIsModalOpened(false);
@@ -50,6 +57,7 @@ function App() {
       ...itemsEquipped,
       [itemSelectedData.category]: itemSelectedData,
     });
+    playAction();
   };
 
   const dropItem = () => {
@@ -57,6 +65,7 @@ function App() {
     newItemsPaginated[page].items.splice(itemSelected, 1);
     newItemsPaginated[page].items.push(emptyItem);
     setItemsPaginated(newItemsPaginated);
+    playAction();
   };
 
   const contextState = {
@@ -77,26 +86,31 @@ function App() {
     switch (event.key) {
       case "ArrowUp":
         newItemSelected = goUp(positionItemSelected);
+        playSelect();
         break;
       case "ArrowDown":
         newItemSelected = newItemSelected = goDown(positionItemSelected);
+        playSelect();
         break;
       case "ArrowLeft":
         if (positionItemSelected.y === 0) {
           navigateToDirection(-1, page, setPage);
         }
         newItemSelected = goLeft(positionItemSelected);
+        playSelect();
         break;
       case "ArrowRight":
         if (positionItemSelected.y === COLUMNS_NUMBER - 1) {
           navigateToDirection(1, page, setPage);
         }
         newItemSelected = goRight(positionItemSelected);
+        playSelect();
         break;
       case "Enter":
         if (isSelectedItemNotEmpty) {
           setIsModalOpened(!isModalOpened);
         }
+        playAction();
         break;
       default:
         break;
@@ -186,6 +200,20 @@ function App() {
       </div>
     </div>
   );
-}
+};
+
+const App = () => {
+  const [playSelect] = useSound(selectSound);
+  const [playAction] = useSound(actionSound, { volume: 0.5 });
+  const contextState = {
+    playSelect,
+    playAction,
+  };
+  return (
+    <SoundContext.Provider value={contextState}>
+      <Zelda />
+    </SoundContext.Provider>
+  );
+};
 
 export default App;

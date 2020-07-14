@@ -3,6 +3,7 @@ import cx from "classnames";
 import TrianglesBox from "./TrianglesBox";
 import useClickOutside from "../utils/hooks/useClickOutside";
 import ItemsContext from "../context/ItemsContext";
+import SoundContext from "../context/SoundContext";
 
 enum ModalOptions {
   EQUIP = 0,
@@ -14,28 +15,39 @@ export default () => {
   const { closeModal, equipItem, dropItem } = useContext(ItemsContext);
   const [selectedOption, setSelectedOption] = useState(ModalOptions.EQUIP);
   const modalRef = useRef<HTMLDivElement>(null);
+  const { playSelect } = useContext(SoundContext);
 
   useClickOutside(modalRef, closeModal);
+
+  const equipAndClose = () => {
+    if (closeModal && equipItem) {
+      equipItem();
+      closeModal();
+    }
+  };
+
+  const dropAndClose = () => {
+    if (closeModal && dropItem) {
+      dropItem();
+      closeModal();
+    }
+  };
 
   const handleKeyPressed = (event: React.KeyboardEvent) => {
     event.stopPropagation();
     if (event.key === "ArrowUp") {
       setSelectedOption(Math.max(selectedOption - 1, 0));
+      playSelect();
     } else if (event.key === "ArrowDown") {
       setSelectedOption(Math.min(selectedOption + 1, 2));
+      playSelect();
     } else if (event.key === "Enter") {
       switch (selectedOption) {
         case ModalOptions.EQUIP:
-          if (closeModal && equipItem) {
-            equipItem();
-            closeModal();
-          }
+          equipAndClose();
           break;
         case ModalOptions.DROP:
-          if (closeModal && dropItem) {
-            dropItem();
-            closeModal();
-          }
+          dropAndClose();
           break;
         default:
           closeModal && closeModal();
@@ -72,6 +84,7 @@ export default () => {
             },
             "flex justify-center px-6 py-2 relative border border-zelda-darkGray mb-4"
           )}
+          onClick={equipAndClose}
         >
           {selectedOption === ModalOptions.EQUIP && <TrianglesBox />}
           Equip
@@ -84,6 +97,7 @@ export default () => {
             },
             "flex justify-center px-6 py-2 relative border border-zelda-darkGray mb-4"
           )}
+          onClick={dropAndClose}
         >
           {selectedOption === ModalOptions.DROP && <TrianglesBox />}
           Drop
@@ -96,6 +110,7 @@ export default () => {
             },
             "flex justify-center px-6 py-2 relative border border-zelda-darkGray"
           )}
+          onClick={closeModal}
         >
           {selectedOption === ModalOptions.CANCEL && <TrianglesBox />}
           Cancel
