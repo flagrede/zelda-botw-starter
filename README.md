@@ -4,7 +4,7 @@
 
 ## Complete demo
 
-https://www.gameuionweb.com/zelda-botw
+[Zelda BOTW UI Demo](https://60ab6a8f04ae260008b8c395--youthful-swirles-08caa6.netlify.app/zelda-botw/inventory)
 
 ## Articles links:
 
